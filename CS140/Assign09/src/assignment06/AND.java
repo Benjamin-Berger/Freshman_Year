@@ -1,0 +1,32 @@
+package assignment06;
+
+public class AND extends Instruction {
+    public AND(Processor cpu, Memory memory) {
+        super(cpu, memory);
+    }
+
+    @Override
+    public void execute(int arg, boolean immediate, boolean indirect) throws DataAccessException {
+        if (immediate) {
+            if(cpu.getAccumulator() != 0 && arg != 0){
+            	cpu.setAccumulator(1);
+            }
+            else{
+            	cpu.setAccumulator(0);
+            }
+            cpu.incrementCounter();
+        }
+        else if (indirect) {
+            System.out.println("Illegal Construction Error: AND cannot be indirect.");                  
+        }
+        else {
+            if(cpu.getAccumulator() != 0 && memory.getData(arg) != 0){
+            	cpu.setAccumulator(1);
+            }
+            else{
+            	cpu.setAccumulator(0);
+            }
+            cpu.incrementCounter();
+        }     
+    }
+}
